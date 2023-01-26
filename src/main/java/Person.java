@@ -1,57 +1,47 @@
 import jdk.jshell.spi.SPIResolutionException;
 
+import java.util.OptionalInt;
+
 public class Person {
     protected final String firstName;
     protected final String lastName;
-    protected int age;
+    protected OptionalInt age;
     protected boolean hasAge = false;
     protected String address;
     protected boolean hasAddress = false;
 
-/*    public Person (String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    public Person (String firstName, String lastName, int age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.hasAge = true;
-    }*/
-
-    public Person (PersonBuilder personBuilder) {
-        if (personBuilder.firstName == null || personBuilder.lastName == null) {
-            throw new IllegalStateException("Fields firstName and lastName are required");
-        }
+    public Person(PersonBuilder personBuilder) {
         this.firstName = personBuilder.firstName;
         this.lastName = personBuilder.lastName;
-        if (personBuilder.age != 0) {
+        if (personBuilder.hasAge) {
             this.age = personBuilder.age;
             this.hasAge = true;
         }
-        if (personBuilder.address != null && !personBuilder.address.equals("")) {
+        if (personBuilder.hasAddress) {
             this.address = personBuilder.address;
             this.hasAddress = true;
         }
     }
 
-    public int getAge() {
+    public OptionalInt getAge() {
         return age;
     }
+
     public String getAddress() {
         return address;
     }
+
     public String getFirstName() {
         return firstName;
     }
+
     public String getLastName() {
         return lastName;
     }
 
     public void happyBurthday() {
         if (hasAge) {
-            age++;
+            age = OptionalInt.of(age.getAsInt() + 1);
         }
     }
 
@@ -69,7 +59,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return lastName + " " + firstName + " " + (hasAddress?address:"") + " "
-                + (hasAge?age:"");
+        return lastName + " " + firstName + " " + (hasAddress ? address : "") + " "
+                + (hasAge ? age.getAsInt() : "");
     }
 }

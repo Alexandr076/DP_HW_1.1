@@ -1,5 +1,7 @@
 import org.w3c.dom.ls.LSOutput;
 
+import java.util.OptionalInt;
+
 public class Main {
     public static void main(String[] args) {
         Person person0 = new PersonBuilder()
@@ -13,7 +15,7 @@ public class Main {
         Person person1 = new PersonBuilder()
                 .setFirstName("Имя")
                 .setLastName("Фамилия")
-                .setAge(24)
+                .setAge(OptionalInt.of(24))
                 .setAddress("Москва")
                 .build();
 
@@ -36,10 +38,10 @@ public class Main {
         try {
             Person person = new PersonBuilder()
                     .setFirstName("Оля")
-                    .setAge(13)
+                    .setAge(OptionalInt.of(13))
                     .build();
         }
-        catch (IllegalStateException e) {
+        catch (Exception e) {
             System.out.println(e.fillInStackTrace());
         }
     }
