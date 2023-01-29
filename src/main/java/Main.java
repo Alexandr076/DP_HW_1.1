@@ -15,7 +15,7 @@ public class Main {
         Person person1 = new PersonBuilder()
                 .setFirstName("Имя")
                 .setLastName("Фамилия")
-                .setAge(OptionalInt.of(24))
+                .setAge(23)
                 .setAddress("Москва")
                 .build();
 
@@ -35,10 +35,13 @@ public class Main {
 
         System.out.println(childsPerson2.toString());
 
+
+
+
         try {
             Person person = new PersonBuilder()
                     .setFirstName("Оля")
-                    .setAge(OptionalInt.of(13))
+                    .setAge(13)
                     .build();
         }
         catch (Exception e) {

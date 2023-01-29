@@ -18,11 +18,11 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder setAge(OptionalInt age) {
-        if (age.getAsInt() <= 0) {
+    public PersonBuilder setAge(int age) {
+        if (age <= 0) {
             throw new IllegalArgumentException("Current age is invalid");
         }
-        this.age = age;
+        this.age = OptionalInt.of(age);
         this.hasAge = true;
         return this;
     }
@@ -39,6 +39,5 @@ public class PersonBuilder {
         } else {
             throw new IllegalStateException("First or last name was missed");
         }
-
     }
 }
